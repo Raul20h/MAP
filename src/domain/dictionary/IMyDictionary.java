@@ -38,7 +38,7 @@ public interface IMyDictionary<T1, T2> {
 	 * @return
 	 * Int, -1 if the variable doesn't exist or a number >= 0 if it does.
 	 */
-	T2 isVar(String name);
+	int isVar(String name);
 	/**
 	 * Checks whether the Dictionary is empty or not.
 	 * 

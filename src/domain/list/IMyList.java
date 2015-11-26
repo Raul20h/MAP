@@ -16,7 +16,7 @@ public interface IMyList<T> {
 	 */
 	void addMsg(T s);
 	/**
-	 * Gets the most recent message from the list(the message is then removed).
+	 * Gets the first message from the list(the message is then removed).
 	 * 
 	 * @param
 	 * None

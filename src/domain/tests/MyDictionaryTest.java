@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.dictionary.MyDictionary;
+import domain.dictionary.MyLibDictionary;
 import exceptions.MyEx;
 
 /**
@@ -17,7 +17,7 @@ import exceptions.MyEx;
  */
 public class MyDictionaryTest {
 	
-	MyDictionary[] temp;
+	MyLibDictionary[] temp;
 	String s;
 
 	/**
@@ -25,10 +25,10 @@ public class MyDictionaryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		temp = new MyDictionary[10];
+		temp = new MyLibDictionary[10];
 		s = "abcdefghij";
 		for(int i = 0; i < 10; ++i){
-			temp[i] = new MyDictionary();
+			temp[i] = new MyLibDictionary();
 			temp[i].addVar("" + s.charAt(i), i*2);
 		}
 	}
@@ -86,7 +86,7 @@ public class MyDictionaryTest {
 	public void testIsEmpty() {
 		for(int i = 0; i < 10; ++i){
 			assertFalse(temp[i].isEmpty());
-			temp[i] = new MyDictionary();
+			temp[i] = new MyLibDictionary();
 			assertTrue(temp[i].isEmpty());
 			temp[i].addVar("x", 32);
 			assertFalse(temp[i].isEmpty());
@@ -104,7 +104,7 @@ public class MyDictionaryTest {
 			tempS = tempS + s.charAt(i) + '=' + i*2;
 			tempS = tempS + "}";
 			assertEquals(tempS, temp[i].toStr());
-			temp[i] = new MyDictionary();
+			temp[i] = new MyLibDictionary();
 			assertEquals("{}", temp[i].toStr());
 			temp[i].addVar("x", i*32);
 			assertNotEquals("{}", temp[i].toStr());

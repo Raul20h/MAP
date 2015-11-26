@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import domain.exp.ConstExp;
-import domain.stack.MyStack;
+import domain.stack.MyLibStack;
 import domain.stmt.PrintStmt;
 
 /**
@@ -18,16 +18,16 @@ import domain.stmt.PrintStmt;
  */
 public class MyStackTest {
 	
-	MyStack[] temp;
+	MyLibStack[] temp;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		temp = new MyStack[10];
+		temp = new MyLibStack[10];
 		for(int i = 0; i < 10; ++i){
-			temp[i] = new MyStack();
+			temp[i] = new MyLibStack();
 		}
 	}
 

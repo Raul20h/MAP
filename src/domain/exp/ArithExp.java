@@ -106,10 +106,23 @@ public class ArithExp extends Exp{
 	@Override
 	public int eval(IMyDictionary<String, Integer> tbl) {
 		if (op==1) return (e1.eval(tbl) + e2.eval(tbl));
+		
 		else if (op==2) return (e1.eval(tbl) - e2.eval(tbl));
+		
 		else if (op==3) return (e1.eval(tbl) * e2.eval(tbl));
-		else if (op==4) return (e1.eval(tbl) / e2.eval(tbl));
-		else if (op==5) return (e1.eval(tbl) % e2.eval(tbl));
+		
+		else if (op==4){
+			if(e2.eval(tbl) == 0)
+				throw new MyEx("DIVISION BY ZERO!");
+			return (e1.eval(tbl) / e2.eval(tbl));
+			
+		}
+		
+		else if (op==5){
+			if(e2.eval(tbl) == 0)
+				throw new MyEx("DIVISION BY ZERO!");
+			return (e1.eval(tbl) % e2.eval(tbl));
+		}
 		return 0;
 	}
 

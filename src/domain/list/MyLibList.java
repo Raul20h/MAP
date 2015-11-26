@@ -1,39 +1,31 @@
+/**
+ * 
+ */
 package domain.list;
+
+import java.util.List;
 
 import exceptions.MyEx;
 
 /**
- * Class used to store output in the toy language interpreter.
- * Implements the IMyList interface.
- * 
  * @author flori
+ *
  */
-public class MyList implements IMyList<String> {
-
-	String[] output;
-	int len;
-
-
-	/**
-	 * The constructor for the MyList class.
-	 * 
-	 * @param
-	 * None
-	 * 
-	 * @return
-	 * Nothing
-	 */
-	public MyList(){
-		output = new String[128];
-		len = 0;
+public class MyLibList implements IMyList<String> {
+	
+	List<String> l;
+	int current;
+	
+	public MyLibList(){
+		current = 0;
 	}
-
+	
 	/* (non-Javadoc)
-	 * @see domain.list.IMyList#addMsg(java.lang.String)
+	 * @see domain.list.IMyList#addMsg(java.lang.Object)
 	 */
 	@Override
 	public void addMsg(String s) {
-		output[len++] = s;
+		l.add(s);
 	}
 
 	/* (non-Javadoc)
@@ -41,9 +33,10 @@ public class MyList implements IMyList<String> {
 	 */
 	@Override
 	public String getMsg() {
-		if(len == 0)
-			throw new MyEx("ERROR: Can't retrieve message. List is empty!");
-		return output[--len];
+		if(l.isEmpty())
+			throw new MyEx("Tried to retrieve message from an empty list!");
+		String temp = l.get(current++);
+		return temp;
 	}
 
 	/* (non-Javadoc)
@@ -51,11 +44,10 @@ public class MyList implements IMyList<String> {
 	 */
 	@Override
 	public String getAll() {
-		String temp = new String();
-		int n = len;
-		for(int i = 0; i < n; ++i){
-			temp = temp + output[i];
-			if(i < n-1)
+		String temp = "";
+		for(int i = current; i < l.size(); ++i){
+			temp = temp + l.get(i);
+			if(i < l.size()-1)
 				temp = temp + ",";
 		}
 		return temp;
@@ -66,9 +58,7 @@ public class MyList implements IMyList<String> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		if(len == 0)
-			return true;
-		return false;
+		return l.isEmpty();
 	}
 
 	/* (non-Javadoc)
@@ -76,7 +66,7 @@ public class MyList implements IMyList<String> {
 	 */
 	@Override
 	public int getLength() {
-		return len;
+		return l.size();
 	}
 
 	/* (non-Javadoc)
@@ -84,8 +74,6 @@ public class MyList implements IMyList<String> {
 	 */
 	@Override
 	public String toStr() {
-		if(this.isEmpty())
-			return "{}";
 		String temp = "{";
 		temp = temp + this.getAll() + "}";
 		return temp;

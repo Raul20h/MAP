@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.dictionary.MyDictionary;
+import domain.dictionary.MyLibDictionary;
 import domain.exp.VarExp;
 
 /**
@@ -17,7 +17,7 @@ import domain.exp.VarExp;
  */
 public class VarExpTest {
 	
-	MyDictionary tbl;
+	MyLibDictionary tbl;
 	VarExp[] temp;
 	String s;
 
@@ -27,7 +27,7 @@ public class VarExpTest {
 	@Before
 	public void setUp() throws Exception {
 		temp = new VarExp[10];
-		tbl = new MyDictionary();
+		tbl = new MyLibDictionary();
 		s = "abcdefghij";
 		for(int i = 0; i < 10; ++i){
 			temp[i] = new VarExp("" + s.charAt(i));

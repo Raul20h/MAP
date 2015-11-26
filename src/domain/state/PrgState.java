@@ -28,9 +28,9 @@ public class PrgState implements IPrgState{
 	 * Nothing
 	 */
 	public PrgState(IStmt prg){
-		exeStack = new MyStack();
-		symTable = new MyDictionary();
-		out = new MyList();
+		exeStack = new MyLibStack();
+		symTable = new MyLibDictionary();
+		out = new MyLibList();
 		original = prg;
 		exeStack.push(prg);
 	}

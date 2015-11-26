@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import domain.list.MyList;
+import domain.list.MyLibList;
 
 /**
  * @author flori
@@ -16,16 +16,16 @@ import domain.list.MyList;
  */
 public class MyListTest {
 	
-	MyList[] temp;
+	MyLibList[] temp;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		temp = new MyList[10];
+		temp = new MyLibList[10];
 		for(int i = 0; i < 10; ++i){
-			temp[i] = new MyList();
+			temp[i] = new MyLibList();
 		}
 	}
 
