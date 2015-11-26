@@ -4,6 +4,7 @@
 package domain.list;
 
 import java.util.List;
+import java.util.Vector;
 
 import exceptions.MyEx;
 
@@ -17,6 +18,7 @@ public class MyLibList implements IMyList<String> {
 	int current;
 	
 	public MyLibList(){
+		l = new Vector<>();
 		current = 0;
 	}
 	

@@ -15,6 +15,10 @@ import exceptions.MyEx;
 public class MyLibStack implements IMyStack<IStmt> {
 	
 	Stack<IStmt> stk;
+	
+	public MyLibStack() {
+		stk = new Stack<IStmt>();
+	}
 
 	/* (non-Javadoc)
 	 * @see domain.stack.IMyStack#push(java.lang.Object)

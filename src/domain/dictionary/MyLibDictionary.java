@@ -3,6 +3,7 @@
  */
 package domain.dictionary;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -15,6 +16,10 @@ import exceptions.MyEx;
 public class MyLibDictionary implements IMyDictionary<String, Integer> {
 	
 	Map<String, Integer> m;
+	
+	public MyLibDictionary() {
+		m = new HashMap<>();
+	}
 	
 	/* (non-Javadoc)
 	 * @see domain.dictionary.IMyDictionary#lookup(java.lang.Object)
@@ -31,8 +36,6 @@ public class MyLibDictionary implements IMyDictionary<String, Integer> {
 	 */
 	@Override
 	public void addVar(String name, Integer value) {
-		if(m.containsKey(name) == true)
-			throw new MyEx("Add method called for a key that already exists!");
 		m.put(name, value);
 	}
 
@@ -80,8 +83,6 @@ public class MyLibDictionary implements IMyDictionary<String, Integer> {
 	 */
 	@Override
 	public void updateVar(String id, Integer val) {
-		if(m.containsKey(id) == false)
-			throw new MyEx("Update method called for a key that doesn't exist yet!");
 		this.addVar(id, val);
 	}
 

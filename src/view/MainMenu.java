@@ -109,7 +109,10 @@ public class MainMenu implements IMainMenu{
 					+ "2. Add print statement.\n"
 					+ "3. Add if statement.\n"
 					+ "4. Add compound statement.\n"
-					+ "5. Add switch statement.");
+					+ "5. Add switch statement.\n"
+					+ "6. Add while statement.\n"
+					+ "7. Add skip statement.\n"
+					+ "8. Add if then statement.");
 			try{
 				System.out.print("Your option: ");
 				o = in.nextInt();
@@ -124,6 +127,12 @@ public class MainMenu implements IMainMenu{
 					return readCompStmt();
 				else if(o == 5)
 					return readSwitchStmt();
+				else if(o == 6)
+					return readWhileStmt();
+				else if(o == 7)
+					return new SkipStmt();
+				else if(o == 8)
+					return readIfThenStmt();
 				else
 					System.out.println("Invalid input!\n");
 			}
@@ -131,6 +140,22 @@ public class MainMenu implements IMainMenu{
 				throw e;
 			}
 		}
+	}
+
+	private IfThenStmt readIfThenStmt() {
+		System.out.println("Give the if's expression:");
+		Exp e = expMenu();
+		System.out.println("Give the then statement:");
+		IStmt s = stmtMenu();
+		return new IfThenStmt(e, s);
+	}
+
+	private IStmt readWhileStmt() {
+		System.out.println("Give the while's expression:");
+		Exp ex = expMenu();
+		System.out.println("Give the statement:");
+		IStmt st = stmtMenu();
+		return new WhileStmt(ex, st);
 	}
 
 	/**
@@ -247,7 +272,10 @@ public class MainMenu implements IMainMenu{
 		System.out.println("Type of expression?\n"
 				+ "1. Constant expression.\n"
 				+ "2. Variable expression.\n"
-				+ "3. Arithmetic expression.");
+				+ "3. Arithmetic expression.\n"
+				+ "4. Relational expression.\n"
+				+ "5. Boolean expression.\n"
+				+ "6. Read expression.");
 		int o;
 		try{
 			while(true){
@@ -260,9 +288,42 @@ public class MainMenu implements IMainMenu{
 					return readVarExp();
 				else if(o == 3)
 					return readArithExp();
+				else if(o == 4)
+					return readRelationalExp();
+				else if(o == 5)
+					return readBooleanExp();
+				else if(o == 6)
+					return readReadExp();
 				else
 					System.out.println("Invalid option!\n");
 			}
+		}
+		catch(InputMismatchException e){
+			throw e;
+		}
+	}
+
+	private ReadExp readReadExp() {
+		return new ReadExp();
+	}
+
+	private BoolExp readBooleanExp() {
+		System.out.print("Give the type of the operation:\n"
+				+ "1. &&\n"
+				+ "2. ||\n"
+				+ "3. !()\n"
+				+ "Your option: ");
+		try{
+			int x = in.nextInt();
+			System.out.print("\n");
+			Exp temp1, temp2 = null;
+			System.out.println("Expression 1: \n");
+			temp1 = expMenu();
+			if(x != 3){
+				System.out.println("Expression 2: \n");
+				temp2 = expMenu();
+			}
+			return new BoolExp(temp1, temp2, x);
 		}
 		catch(InputMismatchException e){
 			throw e;
@@ -320,7 +381,7 @@ public class MainMenu implements IMainMenu{
 	 * InputMismatchException if the value is not an integer.
 	 */
 	private ArithExp readArithExp(){
-		System.out.println("Give the type of the operation:\n"
+		System.out.print("Give the type of the operation:\n"
 				+ "1. +\n"
 				+ "2. -\n"
 				+ "3. *\n"
@@ -336,6 +397,30 @@ public class MainMenu implements IMainMenu{
 			System.out.println("Expression 2: \n");
 			temp2 = expMenu();
 			return new ArithExp(temp1, temp2, x);
+		}
+		catch(InputMismatchException e){
+			throw e;
+		}
+	}
+	
+	private RelationalExp readRelationalExp(){
+		System.out.print("Give the type of the operation:\n"
+				+ "1. <\n"
+				+ "2. <=\n"
+				+ "3. ==\n"
+				+ "4. !=\n"
+				+ "5. >=\n"
+				+ "6. >\n"
+				+ "Your option: ");
+		try{
+			int x = in.nextInt();
+			System.out.print("\n");
+			Exp temp1, temp2;
+			System.out.println("Expression 1: \n");
+			temp1 = expMenu();
+			System.out.println("Expression 2: \n");
+			temp2 = expMenu();
+			return new RelationalExp(temp1, temp2, x);
 		}
 		catch(InputMismatchException e){
 			throw e;

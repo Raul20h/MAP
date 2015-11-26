@@ -61,10 +61,7 @@ public class Controller implements IController{
 				String id = crtStmt1.getId();
 				IMyDictionary<String, Integer> symTbl= state.getSymTbl();
 				int val = exp.eval(symTbl);
-				if (symTbl.isVar(id) >= 0) 
-					symTbl.updateVar(id, val);
-				else 
-					symTbl.addVar(id,val);
+				symTbl.addVar(id,val);
 				return;
 			}
 			else if(crtStmt instanceof PrintStmt){
@@ -80,7 +77,8 @@ public class Controller implements IController{
 				IfStmt crtStmt1 = (IfStmt) crtStmt;
 				Exp exp = crtStmt1.getExp();
 				IMyDictionary<String, Integer> symTbl= state.getSymTbl();
-				if(exp.eval(symTbl) == 0)
+				int val = exp.eval(symTbl) ;
+				if(val == 0)
 					stk.push(crtStmt1.getElseS());
 				else
 					stk.push(crtStmt1.getThenS());
@@ -94,6 +92,22 @@ public class Controller implements IController{
 				aExp = new ArithExp(new VarExp(crtStmt1.getVarName()), crtStmt1.getCase2(), 2);
 				if1 = new IfStmt(aExp, if2, crtStmt1.getStmt2());
 				stk.push(if1);
+				return;
+			}
+			else if(crtStmt instanceof WhileStmt){
+				WhileStmt crtStmt1 = (WhileStmt) crtStmt;
+				IMyDictionary<String, Integer> symTbl= state.getSymTbl();
+				int val = crtStmt1.getExp().eval(symTbl);
+				if(val == 0)
+					return;
+				stk.push(new CompoundStmt(crtStmt1.getStmt(), crtStmt1));
+				return;
+			}
+			else if(crtStmt instanceof SkipStmt)
+				return;
+			else if(crtStmt instanceof IfThenStmt){
+				IfThenStmt crtStmt1 = (IfThenStmt) crtStmt;
+				stk.push(new IfStmt(crtStmt1.getExp(), crtStmt1.getStmt(), new SkipStmt()));
 				return;
 			}
 		}
